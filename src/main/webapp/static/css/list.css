@@ -1,0 +1,61 @@
+@charset "UTF-8";
+.container-fluid{
+	
+}
+#header-name{
+	height:65px;
+	background-color: #00004f;
+	width:300px;
+}
+#header-name h2{
+	color:#FFF;
+	padding-left: 40px;
+}
+#header-user{
+	margin-top:20px;
+	font-size: 20px;
+}
+#header-user button{
+	font-size: 20px;
+	margin-bottom: 3px;
+}
+#function_choice{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	width:102%;
+	background-color:#f1f2f7;
+	border-bottom: 1px solid #000;
+}
+#function_choice button{
+	margin-right:30px;
+	width:120px;
+}
+#function_show{
+	width:102%;
+	height:700px;
+	background-color:#f1f2f7;
+}
+#message_table{
+	font-size: 18px;
+}
+#mes_add{
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+#lab_add{
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+#files_table{
+	font-size: 18px;
+}
+#lab_table{
+	font-size: 18px;
+}
+#upload_add{
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+.help-block{
+	height:20px;
+}

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.EduLabMapper" >
+  <resultMap id="BaseResultMap" type="bean.EduLab" >
+    <id column="l_id" property="lId" jdbcType="BIGINT" />
+    <result column="l_name" property="lName" jdbcType="VARCHAR" />
+    <result column="l_num" property="lNum" jdbcType="VARCHAR" />
+    <result column="l_stime" property="lStime" jdbcType="VARCHAR" />
+    <result column="l_etime" property="lEtime" jdbcType="VARCHAR" />
+    <result column="l_place" property="lPlace" jdbcType="VARCHAR" />
+    <result column="l_people" property="lPeople" jdbcType="VARCHAR" />
+    <result column="l_des" property="lDes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    l_id, l_name, l_num, l_stime, l_etime, l_place, l_people, l_des
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bean.EduLabExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from edu_lab
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from edu_lab
+    where l_id = #{lId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from edu_lab
+    where l_id = #{lId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="bean.EduLabExample" >
+    delete from edu_lab
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="bean.EduLab" >
+    insert into edu_lab (l_id, l_name, l_num, 
+      l_stime, l_etime, l_place, 
+      l_people, l_des)
+    values (#{lId,jdbcType=BIGINT}, #{lName,jdbcType=VARCHAR}, #{lNum,jdbcType=VARCHAR}, 
+      #{lStime,jdbcType=VARCHAR}, #{lEtime,jdbcType=VARCHAR}, #{lPlace,jdbcType=VARCHAR}, 
+      #{lPeople,jdbcType=VARCHAR}, #{lDes,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="bean.EduLab" >
+    insert into edu_lab
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lId != null" >
+        l_id,
+      </if>
+      <if test="lName != null" >
+        l_name,
+      </if>
+      <if test="lNum != null" >
+        l_num,
+      </if>
+      <if test="lStime != null" >
+        l_stime,
+      </if>
+      <if test="lEtime != null" >
+        l_etime,
+      </if>
+      <if test="lPlace != null" >
+        l_place,
+      </if>
+      <if test="lPeople != null" >
+        l_people,
+      </if>
+      <if test="lDes != null" >
+        l_des,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lId != null" >
+        #{lId,jdbcType=BIGINT},
+      </if>
+      <if test="lName != null" >
+        #{lName,jdbcType=VARCHAR},
+      </if>
+      <if test="lNum != null" >
+        #{lNum,jdbcType=VARCHAR},
+      </if>
+      <if test="lStime != null" >
+        #{lStime,jdbcType=VARCHAR},
+      </if>
+      <if test="lEtime != null" >
+        #{lEtime,jdbcType=VARCHAR},
+      </if>
+      <if test="lPlace != null" >
+        #{lPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lPeople != null" >
+        #{lPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="lDes != null" >
+        #{lDes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="bean.EduLabExample" resultType="java.lang.Integer" >
+    select count(*) from edu_lab
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update edu_lab
+    <set >
+      <if test="record.lId != null" >
+        l_id = #{record.lId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lName != null" >
+        l_name = #{record.lName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lNum != null" >
+        l_num = #{record.lNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lStime != null" >
+        l_stime = #{record.lStime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lEtime != null" >
+        l_etime = #{record.lEtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPlace != null" >
+        l_place = #{record.lPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lPeople != null" >
+        l_people = #{record.lPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lDes != null" >
+        l_des = #{record.lDes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update edu_lab
+    set l_id = #{record.lId,jdbcType=BIGINT},
+      l_name = #{record.lName,jdbcType=VARCHAR},
+      l_num = #{record.lNum,jdbcType=VARCHAR},
+      l_stime = #{record.lStime,jdbcType=VARCHAR},
+      l_etime = #{record.lEtime,jdbcType=VARCHAR},
+      l_place = #{record.lPlace,jdbcType=VARCHAR},
+      l_people = #{record.lPeople,jdbcType=VARCHAR},
+      l_des = #{record.lDes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="bean.EduLab" >
+    update edu_lab
+    <set >
+      <if test="lName != null" >
+        l_name = #{lName,jdbcType=VARCHAR},
+      </if>
+      <if test="lNum != null" >
+        l_num = #{lNum,jdbcType=VARCHAR},
+      </if>
+      <if test="lStime != null" >
+        l_stime = #{lStime,jdbcType=VARCHAR},
+      </if>
+      <if test="lEtime != null" >
+        l_etime = #{lEtime,jdbcType=VARCHAR},
+      </if>
+      <if test="lPlace != null" >
+        l_place = #{lPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="lPeople != null" >
+        l_people = #{lPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="lDes != null" >
+        l_des = #{lDes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where l_id = #{lId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bean.EduLab" >
+    update edu_lab
+    set l_name = #{lName,jdbcType=VARCHAR},
+      l_num = #{lNum,jdbcType=VARCHAR},
+      l_stime = #{lStime,jdbcType=VARCHAR},
+      l_etime = #{lEtime,jdbcType=VARCHAR},
+      l_place = #{lPlace,jdbcType=VARCHAR},
+      l_people = #{lPeople,jdbcType=VARCHAR},
+      l_des = #{lDes,jdbcType=VARCHAR}
+    where l_id = #{lId,jdbcType=BIGINT}
+  </update>
+</mapper>

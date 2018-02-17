@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.EduFileMapper" >
+  <resultMap id="BaseResultMap" type="bean.EduFile" >
+    <id column="f_id" property="fId" jdbcType="BIGINT" />
+    <result column="f_name" property="fName" jdbcType="VARCHAR" />
+    <result column="f_t_name" property="fTName" jdbcType="VARCHAR" />
+    <result column="f_url" property="fUrl" jdbcType="VARCHAR" />
+    <result column="f_created" property="fCreated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_name, f_t_name, f_url, f_created
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bean.EduFileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from edu_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!-- 倒叙查找 -->
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="bean.EduFileExample" >
+    	 SELECT * FROM edu_file ORDER BY f_created DESC
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from edu_file
+    where f_id = #{fId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from edu_file
+    where f_id = #{fId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="bean.EduFileExample" >
+    delete from edu_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="bean.EduFile" >
+    insert into edu_file (f_id, f_name, f_t_name, 
+      f_url, f_created)
+    values (#{fId,jdbcType=BIGINT}, #{fName,jdbcType=VARCHAR}, #{fTName,jdbcType=VARCHAR}, 
+      #{fUrl,jdbcType=VARCHAR}, #{fCreated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="bean.EduFile" >
+    insert into edu_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="fName != null" >
+        f_name,
+      </if>
+      <if test="fTName != null" >
+        f_t_name,
+      </if>
+      <if test="fUrl != null" >
+        f_url,
+      </if>
+      <if test="fCreated != null" >
+        f_created,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=BIGINT},
+      </if>
+      <if test="fName != null" >
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fTName != null" >
+        #{fTName,jdbcType=VARCHAR},
+      </if>
+      <if test="fUrl != null" >
+        #{fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreated != null" >
+        #{fCreated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="bean.EduFileExample" resultType="java.lang.Integer" >
+    select count(*) from edu_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update edu_file
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fName != null" >
+        f_name = #{record.fName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fTName != null" >
+        f_t_name = #{record.fTName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fUrl != null" >
+        f_url = #{record.fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCreated != null" >
+        f_created = #{record.fCreated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update edu_file
+    set f_id = #{record.fId,jdbcType=BIGINT},
+      f_name = #{record.fName,jdbcType=VARCHAR},
+      f_t_name = #{record.fTName,jdbcType=VARCHAR},
+      f_url = #{record.fUrl,jdbcType=VARCHAR},
+      f_created = #{record.fCreated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="bean.EduFile" >
+    update edu_file
+    <set >
+      <if test="fName != null" >
+        f_name = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fTName != null" >
+        f_t_name = #{fTName,jdbcType=VARCHAR},
+      </if>
+      <if test="fUrl != null" >
+        f_url = #{fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreated != null" >
+        f_created = #{fCreated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bean.EduFile" >
+    update edu_file
+    set f_name = #{fName,jdbcType=VARCHAR},
+      f_t_name = #{fTName,jdbcType=VARCHAR},
+      f_url = #{fUrl,jdbcType=VARCHAR},
+      f_created = #{fCreated,jdbcType=TIMESTAMP}
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+</mapper>

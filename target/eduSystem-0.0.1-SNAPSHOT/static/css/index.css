@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.container-fluid{
+	background: url("../images/back.jpg") no-repeat;
+	background-size: cover;
+	height:783.5px;
+	width:100%;
+}
+#case{
+	background: url("../images/back1.jpg") no-repeat;
+	background-size: cover;
+	border:2px solid #c0c0c0;
+	width:400px;
+	height:250px;
+	margin-top: 230px;
+	margin-left:500px;
+}
+#case h1{
+	text-align:center;
+	color:#000000;
+}
+#touch button{
+	margin-top:30px;
+	margin-left:50px;
+	width:120px;
+	height:60px;
+}
+.help-block{
+	height:20px;
+}
+#radio input{
+	margin-top: 10px;
+}
+#student_login_choice{
+	margin-left: 50px;
+	
+}
